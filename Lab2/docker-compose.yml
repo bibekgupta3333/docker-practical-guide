@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  web: # docker run -d --name nginx-volume-container -p 8080:80 -v $(pwd)/html:/usr/share/nginx/html nginx-volume-demo
+    build: . # docker build -t nginx-volume-demo .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./html:/usr/share/nginx/html
+    restart: unless-stopped
