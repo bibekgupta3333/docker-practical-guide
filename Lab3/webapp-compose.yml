@@ -1,0 +1,31 @@
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: webappdb
+    networks:
+      - webapp-network
+    volumes:
+      - db-data:/var/lib/mysql
+
+  webapp:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: db
+      DB_NAME: webappdb
+    depends_on:
+      - db
+    networks:
+      - webapp-network
+    volumes:
+      - ./webapp:/usr/share/nginx/html
+
+networks:
+  webapp-network:
+    driver: bridge
+
+volumes:
+  db-data:

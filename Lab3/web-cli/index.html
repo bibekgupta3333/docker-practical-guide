@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Microservices Demo (CLI)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Microservices Demo (CLI)</h1>
+        <p>This page is served from the web container.</p>
+        <p>The web container is connected to the frontend network.</p>
+        <p>The API container is connected to both frontend and backend networks.</p>
+        <p>The database container is only connected to the backend network.</p>
+        <p>API endpoint: <code>http://api-service:3000</code></p>
+    </div>
+</body>
+
+</html>
