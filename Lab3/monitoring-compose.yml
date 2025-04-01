@@ -1,0 +1,9 @@
+services:
+  monitoring:
+    image: alpine:latest
+    network_mode: "host"
+    command: >
+      sh -c "apk add --no-cache iftop htop &&
+             echo 'Monitoring container with host network access' &&
+             sleep infinity"
+    privileged: true

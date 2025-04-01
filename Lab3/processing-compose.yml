@@ -1,0 +1,14 @@
+services:
+  processor:
+    image: alpine:latest
+    network_mode: "none"
+    command: |
+      sh -c 'echo "Processing files in an isolated container" &&
+             mkdir -p /data/processed &&
+             touch /data/processed/result.txt &&
+             echo "Data processed at $(date)" > /data/processed/result.txt &&
+             cat /data/processed/result.txt &&
+             echo "Container has no network access for security" &&
+             sleep infinity'
+    volumes:
+      - ./data:/data

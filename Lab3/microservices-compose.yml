@@ -1,0 +1,74 @@
+services:
+  database:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: appdb
+    networks:
+      - backend-net
+    volumes:
+      - db-data:/var/lib/mysql
+
+  api:
+    image: node:18-alpine
+    working_dir: /app
+    volumes:
+      - ./api:/app
+    command: >
+      sh -c "echo 'API service starting...' &&
+             echo 'const http = require(\"http\");
+             const server = http.createServer((req, res) => {
+               res.statusCode = 200;
+               res.setHeader(\"Content-Type\", \"application/json\");
+               res.end(JSON.stringify({ message: \"Hello from API service!\" }));
+             });
+             server.listen(3000);
+             console.log(\"API server running on port 3000\");' > server.js &&
+             node server.js"
+    depends_on:
+      - database
+    networks:
+      - backend-net
+      - frontend-net
+
+  web:
+    image: nginx:alpine
+    ports:
+      - "8888:80"
+    volumes:
+      - ./web:/usr/share/nginx/html
+    depends_on:
+      - api
+    networks:
+      - frontend-net
+    command: >
+      sh -c "echo '<!DOCTYPE html>
+      <html>
+      <head>
+        <title>Microservices Demo</title>
+        <style>
+          body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+          h1 { color: #333; }
+          .container { max-width: 800px; margin: 0 auto; }
+        </style>
+      </head>
+      <body>
+        <div class=\"container\">
+          <h1>Microservices Demo</h1>
+          <p>This page is served from the web container.</p>
+          <p>The web container is connected to the frontend network.</p>
+          <p>The API container is connected to both frontend and backend networks.</p>
+          <p>The database container is only connected to the backend network.</p>
+          <p>API endpoint: <code>http://api:3000</code></p>
+        </div>
+      </body>
+      </html>' > /usr/share/nginx/html/index.html && nginx -g 'daemon off;'"
+
+networks:
+  frontend-net:
+    driver: bridge
+  backend-net:
+    driver: bridge
+
+volumes:
+  db-data:
