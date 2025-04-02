@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  python-app:
+    build:
+      context: .
+      target: production # Use 'development' for development environment
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
