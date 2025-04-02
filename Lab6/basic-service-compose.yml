@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  nodejs-app:
+    image: ${REGISTRY_NAME:-localhost}/nodejs-swarm-example:latest
+    build:
+      context: ./app
+    ports:
+      - "3000:3000"
+    deploy:
+      mode: replicated
+      replicas: 3
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+    networks:
+      - swarm-network
+
+networks:
+  swarm-network:
+    driver: overlay

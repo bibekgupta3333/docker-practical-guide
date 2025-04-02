@@ -1,0 +1,65 @@
+version: "3.8"
+
+services:
+  frontend:
+    image: ${REGISTRY_NAME:-localhost}/nodejs-swarm-frontend:latest
+    build:
+      context: ./app
+    ports:
+      - "8080:3000"
+    environment:
+      - NODE_ENV=production
+      - API_URL=http://backend:3000
+    deploy:
+      mode: replicated
+      replicas: 3
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+    networks:
+      - swarm-network
+    depends_on:
+      - backend
+
+  backend:
+    image: ${REGISTRY_NAME:-localhost}/nodejs-swarm-backend:latest
+    build:
+      context: ./app
+    environment:
+      - NODE_ENV=production
+      - MONGO_URL=mongodb://mongo:27017/swarmdb
+    deploy:
+      mode: replicated
+      replicas: 3
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+    networks:
+      - swarm-network
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    volumes:
+      - mongo-data:/data/db
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: on-failure
+    networks:
+      - swarm-network
+
+volumes:
+  mongo-data:
+
+networks:
+  swarm-network:
+    driver: overlay

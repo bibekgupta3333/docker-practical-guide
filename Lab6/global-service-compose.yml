@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  app-service:
+    image: ${REGISTRY_NAME:-localhost}/nodejs-swarm-example:latest
+    build:
+      context: ./app
+    ports:
+      - "3000:3000"
+    deploy:
+      mode: replicated
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+    networks:
+      - swarm-network
+
+  monitoring-service:
+    image: ${REGISTRY_NAME:-localhost}/node-monitor:latest
+    build:
+      context: ./app
+    environment:
+      - NODE_ENV=production
+      - SERVICE_TYPE=monitor
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+    networks:
+      - swarm-network
+
+networks:
+  swarm-network:
+    driver: overlay

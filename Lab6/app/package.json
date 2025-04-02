@@ -1,0 +1,21 @@
+{
+  "name": "nodejs-swarm-example",
+  "version": "1.0.0",
+  "description": "A simple Node.js app for Docker Swarm examples",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "docker",
+    "swarm",
+    "nodejs"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "morgan": "^1.10.0"
+  }
+}
