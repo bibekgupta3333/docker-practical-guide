@@ -1,0 +1,33 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.basic
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    # Uncomment to use volumes for development
+    # volumes:
+    #   - ./app:/app
+
+  app-multistage:
+    build:
+      context: .
+      dockerfile: Dockerfile.multistage
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+
+  app-nonroot:
+    build:
+      context: .
+      dockerfile: Dockerfile.nonroot
+    ports:
+      - "3002:3000"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped

@@ -1,0 +1,27 @@
+# Security-focused Dockerfile with non-root user
+FROM node:18-alpine
+
+# Create app directory
+WORKDIR /app
+
+# Create a non-root user with explicit UID and GID
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+# Copy application dependency definitions
+COPY app/package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy application code
+COPY app/ .
+
+# Change ownership to non-root user
+RUN chown -R appuser:appgroup /app
+
+# Use the non-root user
+USER appuser
+
+EXPOSE 3000
+
+CMD ["npm", "start"] 
