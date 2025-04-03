@@ -1,0 +1,36 @@
+# Node.js dependencies
+node_modules
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Docs
+*.md
+!README.md
+
+# Git and version control
+.git
+.gitignore
+.gitattributes
+
+# Docker files
+.dockerignore
+docker-compose*.yml
+docker-bake*
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# IDE files
+.idea
+.vscode
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db 

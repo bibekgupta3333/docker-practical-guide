@@ -1,0 +1,52 @@
+{
+  "variable": {
+    "APP_NAME": {
+      "default": "docker-bake-example"
+    },
+    "REGISTRY": {
+      "default": "myregistry.io"
+    },
+    "VERSION": {
+      "default": "1.0.0"
+    }
+  },
+  "group": {
+    "default": {
+      "targets": ["app-dev"]
+    },
+    "production": {
+      "targets": ["app-prod"]
+    },
+    "all": {
+      "targets": ["app-dev", "app-prod", "app-test"]
+    }
+  },
+  "target": {
+    "base": {
+      "dockerfile": "Dockerfile",
+      "context": "."
+    },
+    "app-dev": {
+      "inherits": ["base"],
+      "target": "development",
+      "tags": ["${REGISTRY}/${APP_NAME}:dev"]
+    },
+    "app-prod": {
+      "inherits": ["base"],
+      "target": "production",
+      "tags": [
+        "${REGISTRY}/${APP_NAME}:${VERSION}",
+        "${REGISTRY}/${APP_NAME}:latest"
+      ],
+      "platforms": ["linux/amd64", "linux/arm64"]
+    },
+    "app-test": {
+      "inherits": ["base"],
+      "target": "development",
+      "tags": ["${REGISTRY}/${APP_NAME}:test"],
+      "args": {
+        "NODE_ENV": "test"
+      }
+    }
+  }
+}

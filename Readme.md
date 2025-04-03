@@ -2686,4 +2686,19 @@ Explore Docker's built-in orchestration with Swarm mode. This lab demonstrates:
 - Service scaling and updates
 - High availability configurations
 
+### Lab 7: Docker Bake and BuildKit Advanced Features
+
+[Go to Lab 7](/Lab7)
+
+Master advanced Docker build techniques with Docker Bake and BuildKit. This lab covers:
+- Multi-target build configurations using Docker Bake
+- Different Bake file formats (HCL, JSON, YAML)
+- Development vs. production build targets
+- Custom build arguments and variables
+- Multi-stage builds with inheritance
+- Docker Compose integration with Bake
+- Build output targeting options
+- Interactive build selection
+
+
 Each lab contains its own detailed README with instructions, explanations, and diagrams. Work through them sequentially for a comprehensive Docker learning experience.
