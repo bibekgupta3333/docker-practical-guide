@@ -26,6 +26,7 @@ A comprehensive guide to Docker with practical, real-world examples and explanat
 - [Docker Swarm](#docker-swarm)
 - [Docker Stack / Docker Service](#docker-stack--docker-service)
 - [Docker Buildx and BuildKit](#docker-buildx-and-buildkit)
+- [Lab8 LocalStack Example](#lab8-localstack-example)
 
 ## Motivation
 
@@ -2691,6 +2692,7 @@ Explore Docker's built-in orchestration with Swarm mode. This lab demonstrates:
 [Go to Lab 7](/Lab7)
 
 Master advanced Docker build techniques with Docker Bake and BuildKit. This lab covers:
+
 - Multi-target build configurations using Docker Bake
 - Different Bake file formats (HCL, JSON, YAML)
 - Development vs. production build targets
@@ -2700,5 +2702,74 @@ Master advanced Docker build techniques with Docker Bake and BuildKit. This lab 
 - Build output targeting options
 - Interactive build selection
 
+### Lab 8: LocalStack Example
+
+[Lab8](lab8/) provides a practical example of using LocalStack to emulate AWS services for local development and testing. LocalStack is a cloud service emulator that allows you to run AWS applications entirely on your local machine without connecting to a remote AWS account.
+
+#### Known Issues and Fixes
+
+1. **Docker Compose Command Issue**:
+
+   - **Problem**: The example uses `docker-compose` command which is deprecated in newer Docker versions.
+   - **Fix**: Use `docker compose` (without the hyphen) instead. The `local-deploy.sh` script has been updated to use the new command format.
+
+2. **Port Conflict**:
+
+   - **Problem**: The default nginx configuration uses port 80 which might be already in use on your system.
+   - **Fix**: Updated `docker-compose.yml` to use port 8080 instead of 80 for the nginx service.
+
+3. **LocalStack Volume Issue**:
+
+   - **Problem**: The LocalStack container fails to start due to "Device or resource busy" error with the mounted volume.
+   - **Fix**: Remove the following volume configuration from the LocalStack service in `docker-compose.yml`:
+     ```yaml
+     - DATA_DIR=/tmp/localstack/data # Remove this environment variable
+     - "localstack_data:/tmp/localstack/data" # Remove this volume mapping
+     ```
+   - Also remove the `localstack_data:` entry from the volumes section.
+
+4. **LocalStack Service Limitations**:
+
+   - **Problem**: The free version of LocalStack doesn't support ECR services which are required for the full CDK deployment.
+   - **Solution**: For complete functionality, consider using LocalStack Pro or deploying to an actual AWS environment.
+
+5. **Node.js Version Compatibility**:
+
+   - **Problem**: The CDK deployment requires Node.js version 14.15.0 or later, but the scripts may be run on an older version.
+   - **Solution**: Update to a compatible Node.js version (18.x recommended) before running the CDK deployment.
+
+6. **API Endpoints and NGINX Rewrite Mismatch**:
+   - **Problem**: The messaging queue functionality fails because of a mismatch between the backend API endpoints and NGINX URL rewriting.
+   - **Fix**: Update the endpoints in backend/server.js to match what NGINX is sending after the rewrite (change from `/api/messages` to just `/messages`), then rebuild the backend container.
+
+### Running the Example
+
+After applying the fixes above, you can run the example with:
+
+```bash
+cd lab8
+docker compose up -d  # Start all services including LocalStack
+./local-deploy.sh     # Deploy to LocalStack (note: ECR features require LocalStack Pro)
+```
+
+Access the application at http://localhost:8080 and the LocalStack services at http://localhost:4566.
+
+### Cleaning Up
+
+When you're done with the Lab8 example, you can clean up all resources with:
+
+```bash
+cd lab8
+./cleanup.sh  # Automated cleanup of all resources
+```
+
+Or manually:
+
+```bash
+cd lab8
+docker compose down --volumes --remove-orphans  # Remove all containers, networks, and volumes
+```
+
+For a more thorough cleanup including images and LocalStack resources, see the detailed cleanup instructions in the [Lab8 README](lab8/README.md#clean-up).
 
 Each lab contains its own detailed README with instructions, explanations, and diagrams. Work through them sequentially for a comprehensive Docker learning experience.

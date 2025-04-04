@@ -1,0 +1,47 @@
+# Docker files
+.docker/
+docker-compose.override.yml
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Local data
+data/
+tmp/
+temp/
+
+# Logs
+logs/
+*.log
+
+# OS specific files
+.DS_Store
+Thumbs.db
+.directory
+*~
+
+# Editor directories and files
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# LocalStack data
+localstack-data/
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+
+# Generated files
+dist/
+build/
+generated/
+
+# Allow keeping empty directories with .gitkeep files
+!.gitkeep 

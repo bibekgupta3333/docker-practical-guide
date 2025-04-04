@@ -1,0 +1,14 @@
+{
+  "lab8-backend": {
+    "repositoryUri": "localhost:4566/lab8-backend",
+    "repositoryName": "lab8-backend"
+  },
+  "lab8-frontend": {
+    "repositoryUri": "localhost:4566/lab8-frontend",
+    "repositoryName": "lab8-frontend"
+  },
+  "lab8-nginx": {
+    "repositoryUri": "localhost:4566/lab8-nginx",
+    "repositoryName": "lab8-nginx"
+  }
+}

@@ -1,0 +1,75 @@
+services:
+  backend:
+    build: ./backend
+    container_name: lab8-backend
+    restart: always
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - RABBITMQ_URL=amqp://rabbitmq:5672
+    depends_on:
+      - rabbitmq
+    networks:
+      - app-network
+
+  frontend:
+    build: ./frontend
+    container_name: lab8-frontend
+    restart: always
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: lab8-rabbitmq
+    restart: always
+    ports:
+      - "5672:5672" # AMQP protocol port
+      - "15672:15672" # Management UI port
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - app-network
+
+  nginx:
+    build: ./nginx
+    container_name: lab8-nginx
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - app-network
+
+  # LocalStack for local AWS service emulation
+  localstack:
+    image: localstack/localstack:latest
+    container_name: lab8-localstack
+    ports:
+      - "4566:4566" # LocalStack Gateway
+      - "4510-4559:4510-4559" # External services port range
+    environment:
+      - DEBUG=1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - SERVICES=ecr,ecs,cloudwatch,logs,iam,ec2,elbv2,cloudformation
+      - DEFAULT_REGION=us-east-1
+      - HOSTNAME_EXTERNAL=localstack
+      - PERSISTENCE=1
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  rabbitmq_data:
