@@ -2702,9 +2702,19 @@ Master advanced Docker build techniques with Docker Bake and BuildKit. This lab 
 - Build output targeting options
 - Interactive build selection
 
-### Lab 8: LocalStack Example
+### Lab 8: LocalStack for Local Cloud Development
 
-[Lab8](lab8/) provides a practical example of using LocalStack to emulate AWS services for local development and testing. LocalStack is a cloud service emulator that allows you to run AWS applications entirely on your local machine without connecting to a remote AWS account.
+[Go to Lab 8](/Lab8)
+
+Learn how to use LocalStack to emulate AWS services for local development and testing. This lab covers:
+
+- Setting up LocalStack as a cloud service emulator
+- Running AWS applications locally without a remote AWS account
+- Configuring Docker Compose for LocalStack integration
+- Working with emulated AWS services like S3, SQS, and Lambda
+- Deploying applications to LocalStack using AWS CDK
+- Troubleshooting common LocalStack configuration issues
+- Development workflow with local cloud resources
 
 #### Known Issues and Fixes
 
