@@ -26,7 +26,18 @@ A comprehensive guide to Docker with practical, real-world examples and explanat
 - [Docker Swarm](#docker-swarm)
 - [Docker Stack / Docker Service](#docker-stack--docker-service)
 - [Docker Buildx and BuildKit](#docker-buildx-and-buildkit)
-- [Lab8 LocalStack Example](#lab8-localstack-example)
+- [Local Practice Labs](#practice-labs)
+
+## Docker Practice Labs
+
+- [Lab1 FastAPI Example](praticeLabs/Lab1)
+- [Lab2 Persistent Volume Example](praticeLabs/Lab2)
+- [Lab3 Networking Example](praticeLabs/Lab3)
+- [Lab4 Multi-Stage Build Example](praticeLabs/Lab4)
+- [Lab5 Image Management Example](praticeLabs/Lab5)
+- [Lab6 Swarm Example](praticeLabs/Lab6)
+- [Lab7 Bake Example](praticeLabs/Lab7)
+- [Lab8 LocalStack Example](praticeLabs/Lab8)
 
 ## Motivation
 
@@ -2618,7 +2629,7 @@ This repository includes a series of hands-on lab exercises to help you master D
 
 ### Lab 1: Docker FastAPI Tutorial
 
-[Go to Lab 1](/Lab1)
+[Go to Lab 1](/praticeLabs/Lab1)
 
 Learn how to containerize a FastAPI application using Docker and Docker Compose. This lab covers:
 
@@ -2629,7 +2640,7 @@ Learn how to containerize a FastAPI application using Docker and Docker Compose.
 
 ### Lab 2: Docker Persistent Volume Demo
 
-[Go to Lab 2](/Lab2)
+[Go to Lab 2](/praticeLabs/Lab2)
 
 Explore Docker volumes for data persistence using an Nginx web server example. This lab demonstrates:
 
@@ -2640,7 +2651,7 @@ Explore Docker volumes for data persistence using an Nginx web server example. T
 
 ### Lab 3: Docker Networking Examples
 
-[Go to Lab 3](/Lab3)
+[Go to Lab 3](/praticeLabs/Lab3)
 
 Comprehensive guide to Docker networking with multiple scenarios. This lab covers:
 
@@ -2652,7 +2663,7 @@ Comprehensive guide to Docker networking with multiple scenarios. This lab cover
 
 ### Lab 4: Docker Multi-Stage Build Examples
 
-[Go to Lab 4](/Lab4)
+[Go to Lab 4](/praticeLabs/Lab4)
 
 Master multi-stage builds to create efficient, secure Docker images. This lab includes examples for:
 
@@ -2664,7 +2675,7 @@ Master multi-stage builds to create efficient, secure Docker images. This lab in
 
 ### Lab 5: Docker Image Management
 
-[Go to Lab 5](/Lab5)
+[Go to Lab 5](/praticeLabs/Lab5)
 
 Learn various Docker image management techniques and best practices. This lab covers:
 
@@ -2676,7 +2687,7 @@ Learn various Docker image management techniques and best practices. This lab co
 
 ### Lab 6: Docker Swarm Examples
 
-[Go to Lab 6](/Lab6)
+[Go to Lab 6](/praticeLabs/Lab6)
 
 Explore Docker's built-in orchestration with Swarm mode. This lab demonstrates:
 
@@ -2689,7 +2700,7 @@ Explore Docker's built-in orchestration with Swarm mode. This lab demonstrates:
 
 ### Lab 7: Docker Bake and BuildKit Advanced Features
 
-[Go to Lab 7](/Lab7)
+[Go to Lab 7](/praticeLabs/Lab7)
 
 Master advanced Docker build techniques with Docker Bake and BuildKit. This lab covers:
 
@@ -2704,7 +2715,7 @@ Master advanced Docker build techniques with Docker Bake and BuildKit. This lab 
 
 ### Lab 8: LocalStack for Local Cloud Development
 
-[Go to Lab 8](/Lab8)
+[Go to Lab 8](/praticeLabs/Lab8)
 
 Learn how to use LocalStack to emulate AWS services for local development and testing. This lab covers:
 
