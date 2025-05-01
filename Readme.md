@@ -30,14 +30,14 @@ A comprehensive guide to Docker with practical, real-world examples and explanat
 
 ## Docker Practice Labs
 
-- [Lab1 FastAPI Example](praticeLabs/Lab1)
-- [Lab2 Persistent Volume Example](praticeLabs/Lab2)
-- [Lab3 Networking Example](praticeLabs/Lab3)
-- [Lab4 Multi-Stage Build Example](praticeLabs/Lab4)
-- [Lab5 Image Management Example](praticeLabs/Lab5)
-- [Lab6 Swarm Example](praticeLabs/Lab6)
-- [Lab7 Bake Example](praticeLabs/Lab7)
-- [Lab8 LocalStack Example](praticeLabs/Lab8)
+- [Lab1 FastAPI Example](lab1_fastapi_example)
+- [Lab2 Persistent Volume Example](lab2_persistent_volume_example)
+- [Lab3 Networking Example](lab3_networking_example)
+- [Lab4 Multi-Stage Build Example](lab4_multi_stage_build_example)
+- [Lab5 Image Management Example](lab5_image_management_example)
+- [Lab6 Swarm Example](lab6_swarm_example)
+- [Lab7 Bake Example](lab7_bake_example)
+- [Lab8 LocalStack Example](lab8_localStack_example)
 
 ## Motivation
 
